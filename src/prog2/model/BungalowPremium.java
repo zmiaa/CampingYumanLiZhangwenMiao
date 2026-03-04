@@ -5,114 +5,54 @@ import prog2.vista.ExcepcioReserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class BungalowPremium extends Allotjament implements InCamping{
-    @Override
-    public String getNom() {
-        return "";
+public class BungalowPremium extends Allotjament {
+    private String mida;
+    private int habitacions, placesPersones, placesParquing;
+    private boolean terrassa, tv, aireFred, serveisExtra;
+    private String codiWifi;
+
+    public BungalowPremium(String nom, String id, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, String codiWifi) {
+        super(nom, id, 7, 4);
+        this.mida = mida;
+        this.habitacions = habitacions;
+        this.placesPersones = placesPersones;
+        this.placesParquing = placesParquing;
+        this.terrassa = terrassa;
+        this.tv = tv;
+        this.aireFred = aireFred;
+        this.serveisExtra = serveisExtra;
+        this.codiWifi = codiWifi;
     }
 
-    @Override
-    public LlistaReserves getLlistaReserves() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Allotjament> getLlistaAllotjaments() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Client> getLlistaClients() {
-        return null;
-    }
-
-    @Override
-    public int getNumAllotjaments() {
-        return 0;
-    }
-
-    @Override
-    public int getNumReserves() {
-        return 0;
-    }
-
-    @Override
-    public int getNumClients() {
-        return 0;
-    }
-
-    @Override
-    public void afegirClient(String nom_, String dni_) {
-
-    }
-
-    @Override
-    public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
-
-    }
-
-    @Override
-    public void afegirBungalow(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred) {
-
-    }
-
-    @Override
-    public void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, String codiWifi) {
-
-    }
-
-    @Override
-    public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota) {
-
-    }
-
-    @Override
-    public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-
-    }
-
-    @Override
-    public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-
-    }
-
-    @Override
-    public int calculAllotjamentsOperatius() {
-        return 0;
-    }
-
-    @Override
-    public Allotjament getAllotjamentEstadaMesCurta(Temp temp) {
-        return null;
-    }
-
-    @Override
-    public void setNom(String nom) {
-
-    }
-
-    @Override
-    public String getId() {
-        return "";
-    }
-
-    @Override
-    public void setId(String id) {
-
-    }
-
-    @Override
-    public long getEstadaMinima(Temp temp) {
-        return 0;
-    }
-
-    @Override
-    public void setEstadaMinima(long estadaMinimaALTA_, long estadaMinimaBAIXA_) {
-
-    }
-
+    /* Un Bungalow Premium funciona correctament si té aire fred i
+       el codi Wifi té entre 8 i 16 caràcters.*/
     @Override
     public boolean correcteFuncionament() {
-        return false;
+        boolean wifiValid = codiWifi != null && codiWifi.length() >= 8 && codiWifi.length() <= 16;
+        return aireFred && wifiValid;
     }
+
+    public boolean isServeisExtra(){
+        return serveisExtra;
+    }
+
+    public void setServeisExtra(boolean serveisExtra){
+        this.serveisExtra = serveisExtra;
+    }
+
+    public String getCodiWifi() {
+        return codiWifi;
+    }
+
+    public void setCodiWifi(String codiWifi) {
+        this.codiWifi = codiWifi;
+    }
+
+        @Override
+    public String toString() {
+        return super.toString() + " BungalowPremium {mida=" + mida + ", habitacions=" + habitacions +
+                ", placesPersones=" + placesPersones + ", placesParquing=" + placesParquing +
+                ", terrassa=" + terrassa + ", tv=" + tv + ", aireFred=" + aireFred +
+                ", serveisExtra=" + serveisExtra + ", codiWifi='" + codiWifi + "'}";
+        }
 }
